@@ -41,7 +41,15 @@ public class CustomUserDetailsService implements UserDetailsService {
         }
 
         UserDto userDto = new UserDto();
-        BeanUtils.copyProperties(user, userDto);
+        BeanUtils.copyProperties(user, userDto); // shallow copy
+
+        Set<RoleDto> roleDtoSet = user.getRoles().stream().map(roleEntity -> {
+            RoleDto roleDto = new RoleDto();
+            roleDto.setId(roleEntity.getId());
+            roleDto.setRoleName(roleEntity.getRoleName());
+            return roleDto;
+        }).collect(Collectors.toSet());
+        userDto.setRoles(roleDtoSet);
 
         return userDto;
     }
