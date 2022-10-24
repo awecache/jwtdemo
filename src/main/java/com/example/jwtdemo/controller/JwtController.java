@@ -1,7 +1,9 @@
 package com.example.jwtdemo.controller;
 
+import com.example.jwtdemo.entity.UserEntity;
 import com.example.jwtdemo.model.JwtRequest;
 import com.example.jwtdemo.model.JwtResponse;
+import com.example.jwtdemo.model.UserDto;
 import com.example.jwtdemo.service.CustomUserDetailsService;
 import com.example.jwtdemo.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,13 @@ public class JwtController {
 
     @Autowired
     private JwtUtil jwtUtil;
+
+    @PostMapping("/register")
+    public ResponseEntity<UserDto> register(@RequestBody UserDto userDto) {
+        UserDto userEntity = customUserDetailsService.register(userDto);
+
+        return new ResponseEntity<>(userDto, HttpStatus.CREATED);
+    }
 
     @PostMapping("/generateToken")
     public ResponseEntity<JwtResponse> generateToken(@RequestBody JwtRequest request) {
