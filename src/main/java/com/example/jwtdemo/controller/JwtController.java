@@ -14,6 +14,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
+
 @RestController
 @RequestMapping("api")
 @CrossOrigin
@@ -35,7 +37,7 @@ public class JwtController {
         return new ResponseEntity<>(userDto, HttpStatus.CREATED);
     }
 
-    @PostMapping("/generateToken")
+    @PostMapping("/login")
     public ResponseEntity<JwtResponse> generateToken(@RequestBody JwtRequest request) {
 
         UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword());
@@ -45,7 +47,13 @@ public class JwtController {
         String token = jwtUtil.generateToken(userDetails);
 
         JwtResponse jwtResponse = new JwtResponse(token);
-//        return ResponseEntity.ok(jwtResponse);
+
         return new ResponseEntity<>(jwtResponse, HttpStatus.OK);
+    }
+
+    @GetMapping("/currentUser")
+    public UserDto getCurrentUser(Principal principal) {
+        UserDetails userDetails = this.customUserDetailsService.loadUserByUsername(principal.getName());
+        return (UserDto) userDetails;
     }
 }
