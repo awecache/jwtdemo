@@ -1,11 +1,7 @@
 package com.example.jwtdemo.model;
 
-import com.example.jwtdemo.entity.RoleEntity;
-import com.example.jwtdemo.entity.UserEntity;
-import com.example.jwtdemo.repository.UserRepository;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -27,9 +23,6 @@ public class UserDto implements UserDetails {
     private String phone;
     private Set<RoleDto> roles = new HashSet<>();
 
-//    @Autowired
-//    private UserRepository userRepository;
-
     public Long getId() {
         return id;
     }
@@ -44,22 +37,22 @@ public class UserDto implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 
     public void setUsername(String username) {
