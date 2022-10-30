@@ -59,6 +59,8 @@ public class UserDto implements UserDetails {
         this.username = username;
     }
 
+
+    // mapping of roles and authorities from database to UserDetail (app)
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
 
