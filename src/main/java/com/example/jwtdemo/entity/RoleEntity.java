@@ -14,6 +14,7 @@ public class RoleEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(unique = true)
     private String roleName;
 
     @JsonBackReference

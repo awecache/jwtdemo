@@ -1,6 +1,5 @@
 package com.example.jwtdemo.controller;
 
-import com.example.jwtdemo.entity.UserEntity;
 import com.example.jwtdemo.model.JwtRequest;
 import com.example.jwtdemo.model.JwtResponse;
 import com.example.jwtdemo.model.UserDto;
@@ -12,7 +11,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
 

@@ -15,8 +15,8 @@ public class RoleController {
     private RoleService roleService;
 
     @PostMapping("/roles")
-    public RoleDto createRole(@RequestBody RoleDto role) {
-        return roleService.createRole(role);
+    public List<RoleDto> createRole(@RequestBody List<RoleDto> roles) {
+        return roleService.createRoles(roles);
     }
 
     @GetMapping("/roles")
