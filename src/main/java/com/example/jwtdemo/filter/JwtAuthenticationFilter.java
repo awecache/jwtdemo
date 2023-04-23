@@ -15,6 +15,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Objects;
 
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
@@ -32,7 +33,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         String token = null;
 
         //check if token exist
-        if (bearerToken != null && bearerToken.startsWith("Bearer")) {
+        if (Objects.isNull(bearerToken)) {
+            System.out.println("Auth token is null");
+            filterChain.doFilter(request, response);
+            return;
+        }
+
+        //check if token is valid
+        if (bearerToken.startsWith("Bearer")) {
             //extract jwt token
             token = bearerToken.substring(7);
 
